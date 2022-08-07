@@ -12,12 +12,12 @@ def index():
 
 @app.route("/recipes/")
 def recipes():
-    return render_template("recipes.html")
+    return render_template("recipes_all.html")
     
 @app.route("/register/",methods=["POST"])
 def register():
     return redirect("/recipes/")
 
-@app.login("/login/",methods=["POST"])
+@app.route("/login/",methods=["POST"])
 def login():
     return redirect("/recipes/")
