@@ -1,5 +1,10 @@
 {% extends "index.html" %}
-{% block %}
+{% block body %}
+<div class="d-flex align-items-center p-4">
+    <h1 class="">Welcome, {{user.first_name}}</h1>
+    <a href="/create_recipe/" class="ms-auto me-5">create</a>
+    <a href="/logout/" >logout</a>
+</div>
 
 
-{% endblock %}
+{% endblock body %}

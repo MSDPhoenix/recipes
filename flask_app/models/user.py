@@ -10,13 +10,13 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class User:
     def __init__(self,data):
-        self.id = data["xxxx"]
-        self.first_name = data["xxxx"]
-        self.last_name = data["xxxx"]
-        self.email = data["xxxx"]
-        self.password = data["xxxx"]
-        self.created_at = data["xxxx"]
-        self.updated_at = data["xxxx"]
+        self.id = data["id"]
+        self.first_name = data["first_name"]
+        self.last_name = data["last_name"]
+        self.email = data["email"]
+        self.password = data["password"]
+        self.created_at = data["created_at"]
+        self.updated_at = data["updated_at"]
 
     @classmethod
     def get_all(cls):
@@ -36,15 +36,19 @@ class User:
                 SELECT * FROM users WHERE id = %(user_id)s;
                 """
         result = connectToMySQL(db).query_db(query,data)
+        print("A")
+        print(result)
         user = cls(result[0])
         return user
 
     @classmethod
     def get_by_email(cls,data):
         query = """
-                SELCT * FROM users WHERE email = %(email)s; 
+                SELECT * FROM users WHERE email = %(email)s; 
                 """
         result = connectToMySQL(db).query_db(query,data)
+        if len(result) == 0:
+            return False
         user = cls(result[0])
         return user
 

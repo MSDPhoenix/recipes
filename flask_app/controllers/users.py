@@ -10,12 +10,24 @@ bcrypt =  Bcrypt(app)
 def index():
     return render_template("index.html")
 
-@app.route("/recipes/")
-def recipes():
-    return render_template("recipes_all.html")
-    
 @app.route("/register/",methods=["POST"])
 def register():
+    if not User.validate(request.form):
+        session["first_name"] = request.form["first_name"]
+        session["last_name"] = request.form["last_name"]
+        session["email"] = request.form["email"]
+        session["password"] = request.form["password"]
+        session["confirm_password"] = request.form["confirm_password"]
+        return redirect("/")
+    pw_hash = bcrypt.generate_password_hash(request.form["password"])
+    data = {
+        "first_name" : request.form["first_name"],
+        "last_name" : request.form["last_name"],
+        "email" : request.form["email"],
+        "password" : pw_hash
+    }
+    user_id = User.save(data)
+    session["user_id"] = user_id
     return redirect("/recipes/")
 
 @app.route("/login/",methods=["POST"])
