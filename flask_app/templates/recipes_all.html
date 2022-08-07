@@ -5,6 +5,29 @@
     <a href="/create_recipe/" class="ms-auto me-5">create</a>
     <a href="/logout/" >logout</a>
 </div>
-
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Under 30</th>
+            <th scope="col">Posted by</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for recipe in recipes %}
+            <tr>
+                    <td>{{recipe.name}}</td>
+                    <td>{{recipe.under_30}}</td>
+                    <td>{{recipe.posted_by.first_name}}</td>
+                <td>
+                    <a href="/recipe_view/">view recipe</a>
+                    <a href="/recipe_edit/">edit</a>
+                    <a href="/recipe_delete/">delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock body %}
