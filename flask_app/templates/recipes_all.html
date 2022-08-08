@@ -22,8 +22,10 @@
                     <td>{{recipe.posted_by.first_name}}</td>
                 <td>
                     <a href="/recipe_view/">view recipe</a>
-                    <a href="/recipe_edit/">edit</a>
-                    <a href="/recipe_delete/">delete</a>
+                    {% if user.id == recipe.posted_by_id %}
+                        | <a href="/recipe_edit/">edit</a>
+                        | <a href="/recipe_delete/">delete</a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

@@ -18,6 +18,7 @@ class Recipe:
         self.instructions = data["instructions"]
         self.under_30 = data["under_30"]
         self.posted_by_id = data["posted_by_id"]
+        self.posted_by = None
 
     @classmethod
     def get_all(cls):
@@ -28,6 +29,10 @@ class Recipe:
         recipes = []
         for row in result:
             recipe = cls(row)
+            user_data = {
+                "user_id" : row["posted_by_id"]
+            }
+            recipe.posted_by = user.User.get_by_id(user_data)
             recipes.append(recipe)
         return recipes
     

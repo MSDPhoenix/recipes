@@ -87,7 +87,7 @@ class User:
             flash("First name must contain at least 2 letters","register")
             is_valid = False
         elif not data["first_name"].isalpha():
-            flash("First name must contain letters only")
+            flash("First name must contain letters only","register")
             is_valid = False
 
         if len(data["last_name"]) <1:
@@ -97,7 +97,7 @@ class User:
             flash("Last name must contain at least 2 letters","register")
             is_valid = False
         elif not data["last_name"].isalpha():
-            flash("Last name must contain letters only")
+            flash("Last name must contain letters only","register")
             is_valid = False
 
         if len(data["email"]) <1:
@@ -107,7 +107,7 @@ class User:
             flash("Must use valid email format","register")
             is_valid = False
         elif User.get_by_email(data):
-            flash("This email is already registered")
+            flash("This email is already registered","register")
             is_valid = False
         
         if len(data["password"]) <1:
@@ -117,7 +117,7 @@ class User:
             flash("Password must contain at least 8 letters","register")
             is_valid = False
         elif data["password"] != data["confirm_password"]:
-            flash("Password does not match confirm password")
+            flash("Password does not match confirm password","register")
             is_valid = False
         
         return is_valid

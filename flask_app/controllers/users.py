@@ -32,4 +32,18 @@ def register():
 
 @app.route("/login/",methods=["POST"])
 def login():
+    data = {
+        'email' : request.form["email"]
+    }
+    user = User.get_by_email(data)
+    if not user or not bcrypt.check_password_hash(user.password,request.form["password"]):
+        flash("Invalid email/password","login")
+        return redirect("/")
+    session.clear()
+    session["user_id"] = user.id
     return redirect("/recipes/")
+
+@app.route("/logout/")
+def logout():
+    session.clear()
+    return redirect("/")
