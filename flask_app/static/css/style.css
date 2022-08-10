@@ -13,3 +13,11 @@ input {
 input[type="submit"] {
     box-shadow: 5px 5px 5px black;
 }
+table {
+    border-top: 3px black inset;
+    border-left: 3px black solid;
+    border-bottom: 3px black solid;
+}
+th, td {
+    border-right: 3px black inset;
+}
