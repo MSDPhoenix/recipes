@@ -16,3 +16,6 @@ def recipes():
     user = User.get_by_id(data)
     return render_template("recipes_all.html",recipes=recipes,user=user)
     
+@app.route("/create_recipe/")
+def create_recipe():
+    return render_template("recipes_add.html",user=User.get_by_id({"user_id" : session["user_id"]}))
