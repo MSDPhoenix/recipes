@@ -16,6 +16,7 @@ class Recipe:
         self.name = data["name"]
         self.description = data["description"]
         self.instructions = data["instructions"]
+        self.date_made = data["instructions"]
         self.under_30 = data["under_30"]
         self.posted_by_id = data["posted_by_id"]
         self.posted_by = None
@@ -36,5 +37,11 @@ class Recipe:
             recipes.append(recipe)
         return recipes
     
-
+    @classmethod
+    def save(cls,data):
+        query = """
+                INSERT INTO recipes (name,description,instructions,date_made,under_30,posted_by_id)
+                VALUES (%(name)s,%(description)s,%(instructions)s,%(date_made)s,%(under_30)s,%(posted_by_id)s);
+                """
+        return connectToMySQL(db).query_db(query,data)
 

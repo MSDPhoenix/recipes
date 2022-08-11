@@ -19,3 +19,17 @@ def recipes():
 @app.route("/create_recipe/")
 def create_recipe():
     return render_template("recipes_add.html",user=User.get_by_id({"user_id" : session["user_id"]}))
+
+@app.route("/save_recipe/",methods=["POST"])
+def save_recipe():
+    # user=User.get_by_id(session["user_id"])
+    data = {
+        "name" : request.form["name"],
+        "description" : request.form["description"],
+        "instructions" : request.form["instructions"],
+        "date_made" : request.form["date_made"],
+        "under_30" : request.form["under_30"],
+        "posted_by_id" : session["user_id"],
+    }
+    Recipe.save(data)
+    return redirect("/recipes/")

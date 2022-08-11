@@ -4,10 +4,10 @@
     padding:0px;
     box-sizing: border-box;
     vertical-align: top;
-    /* outline: red 1px dotted; */
+    outline: red 1px dotted;
     font-size: x-large;
 }
-input {
+input,textarea {
     border: 3px black solid;
 }
 input[type="submit"] {
