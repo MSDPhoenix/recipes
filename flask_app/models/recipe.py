@@ -45,3 +45,33 @@ class Recipe:
                 """
         return connectToMySQL(db).query_db(query,data)
 
+    @staticmethod
+    def validate(data):
+        is_valid = True
+        if len(data["name"]) < 1:
+            flash("xxxxx","recipes_add")
+            is_valid = False
+        if len(data["description"]) < 1:
+            flash("xxxxx","recipes_add")
+            is_valid = False
+        if len(data["instructions"]) < 1:
+            flash("xxxxx","recipes_add")
+            is_valid = False
+        if len(data["date_made"]) < 1:
+            flash("xxxxx","recipes_add")
+            is_valid = False
+        if len(data["under_30"]) < 1:
+            flash("xxxxx","recipes_add")
+            is_valid = False
+        if len(data["under_30"]) < 3:
+            flash("xxxxx","recipes_add")
+            is_valid = False
+        if len(data["under_30"]) < 3:
+            flash("xxxxx","recipes_add")
+            is_valid = False
+        if len(data["under_30"]) < 3:
+            flash("xxxxx","recipes_add")
+            is_valid = False
+
+
+        return is_valid

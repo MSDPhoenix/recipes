@@ -18,6 +18,8 @@ def recipes():
     
 @app.route("/create_recipe/")
 def create_recipe():
+    if "user_id" not in session:
+        return redirect("/")
     return render_template("recipes_add.html",user=User.get_by_id({"user_id" : session["user_id"]}))
 
 @app.route("/save_recipe/",methods=["POST"])
