@@ -2,7 +2,7 @@
 {% block body %}
 <div class="px-5 mx-5">
     <div class="d-flex align-items-cente pt-5 pb-3">
-        <h1 class="">Add a New Recipe! --  {{user.first_name}}</h1>
+        <h1 class="">Add a New Recipe!</h1>
         <a href="/recipes/" class="ms-auto me-5">back to recipes</a>
         <a href="/logout/" >logout</a>
     </div>
@@ -16,19 +16,19 @@
     <form class="row mt-3" action="/save_recipe/" method="post">
         <div class="col-7 me-5">
             <label for="name" class="col-3 p-2 mb-3">Name</label>
-            <input type="text" name="name" id="" class="col-8 p-2 mb-3">
+            <input type="text" name="name" id="" class="col-8 p-2 mb-3" value="{{session.name}}">
             <label for="description" class="col-3 p-2 mb-3">Description</label>
-            <textarea name="description" cols="30" rows="3" class="col-8 p-2 mb-3"></textarea>
+            <textarea name="description" cols="30" rows="3" class="col-8 p-2 mb-3">{{session.description}}</textarea>
             <label for="instructions" class="col-3 p-2 mb-3">Instructions</label>
-            <textarea name="instructions" cols="30" rows="5" class="col-8 p-2 mb-3"></textarea>
+            <textarea name="instructions" cols="30" rows="5" class="col-8 p-2 mb-3">{{session.instructions}}</textarea>
         </div>
         <div class="col-3 ms-0">
             <label for="date_made" class="d-block pt-2 mb-3">Date Cooked/Made:</label>
-            <input type="date" name="date_made" id="" class="d-block mb-3 p-2">
-            <label for="" class="d-block pt-2 mb-3">Under 30 minutes?</label>
-            <input type="radio" name="under_30" value="yes" class="">
+            <input type="date" name="date_made" id="" class="d-block mb-3 p-2" value="{{session.date_made}}">
+            <label for="under_30" class="d-block pt-2 mb-3">Under 30 minutes?</label>
+            <input type="radio" name="under_30" value="yes" class="" {% if session.under_30 == "yes" %} checked {% endif %}>
             <label for="under_30" class="me-5">Yes</label>
-            <input type="radio" name="under_30" value="no" class="">
+            <input type="radio" name="under_30" value="no" class="" {% if session.under_30 == "no" %} checked {% endif %}>
             <label for="under_30" class="">No</label>
             <input type="submit" class="d-block mt-5 ms-auto px-3">
         </div>

@@ -24,7 +24,26 @@ def create_recipe():
 
 @app.route("/save_recipe/",methods=["POST"])
 def save_recipe():
-    # user=User.get_by_id(session["user_id"])
+    if "user_id" not in session:
+        return redirect("/")
+    if not Recipe.validate(request.form):
+        session["name"] = request.form["name"]
+        session["description"] = request.form["description"]
+        session["instructions"] = request.form["instructions"]
+        session["date_made"] = request.form["date_made"]
+        if "under_30" in request.form:
+            session["under_30"] = request.form["under_30"]
+        return redirect("/create_recipe/")
+    if "name" in session:
+        session.pop("name")
+    if "description" in session:
+        session.pop("description")
+    if "instructions" in session:
+        session.pop("instructions")
+    if "date_made" in session:
+        session.pop("date_made")
+    if "under_30" in session:
+        session.pop("under_30")
     data = {
         "name" : request.form["name"],
         "description" : request.form["description"],

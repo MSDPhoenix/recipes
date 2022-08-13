@@ -49,29 +49,27 @@ class Recipe:
     def validate(data):
         is_valid = True
         if len(data["name"]) < 1:
-            flash("xxxxx","recipes_add")
+            flash("Name is required","recipes_add")
+            is_valid = False
+        elif len(data["name"]) < 3:
+            flash("Name must be at least 3 letters","recipes_add")
             is_valid = False
         if len(data["description"]) < 1:
-            flash("xxxxx","recipes_add")
+            flash("Description required","recipes_add")
+            is_valid = False
+        elif len(data["description"]) < 3:
+            flash("Description must be at least 3 letters","recipes_add")
             is_valid = False
         if len(data["instructions"]) < 1:
-            flash("xxxxx","recipes_add")
+            flash("Instructions required","recipes_add")
+            is_valid = False
+        elif len(data["instructions"]) < 3:
+            flash("Instructions must be at least 3 letters","recipes_add")
             is_valid = False
         if len(data["date_made"]) < 1:
-            flash("xxxxx","recipes_add")
+            flash("Date cooked/made is required","recipes_add")
             is_valid = False
-        if len(data["under_30"]) < 1:
-            flash("xxxxx","recipes_add")
+        if "under_30" not in data:
+            flash("\"Under 30 minutes?\" is required","recipes_add")
             is_valid = False
-        if len(data["under_30"]) < 3:
-            flash("xxxxx","recipes_add")
-            is_valid = False
-        if len(data["under_30"]) < 3:
-            flash("xxxxx","recipes_add")
-            is_valid = False
-        if len(data["under_30"]) < 3:
-            flash("xxxxx","recipes_add")
-            is_valid = False
-
-
         return is_valid
