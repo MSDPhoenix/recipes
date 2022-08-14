@@ -16,7 +16,7 @@ class Recipe:
         self.name = data["name"]
         self.description = data["description"]
         self.instructions = data["instructions"]
-        self.date_made = data["instructions"]
+        self.date_made = data["date_made"]
         self.under_30 = data["under_30"]
         self.posted_by_id = data["posted_by_id"]
         self.posted_by = None
@@ -38,10 +38,28 @@ class Recipe:
         return recipes
     
     @classmethod
+    def get_by_id(cls,data):
+        query = """
+                SELECT * FROM recipes WHERE id = %(recipe_id)s; 
+                """
+        result = connectToMySQL(db).query_db(query,data)
+        recipe = cls(result[0])
+        return recipe
+
+    @classmethod
     def save(cls,data):
         query = """
                 INSERT INTO recipes (name,description,instructions,date_made,under_30,posted_by_id)
                 VALUES (%(name)s,%(description)s,%(instructions)s,%(date_made)s,%(under_30)s,%(posted_by_id)s);
+                """
+        return connectToMySQL(db).query_db(query,data)
+
+    @classmethod
+    def update(cls,data):
+        query = """
+                UPDATE recipes
+                SET xxx=%(name)s,xxx=%(description)s,xxx=%(instructions)s,xxx=%(date_made)s,xxx=%(under_30)s
+                WHERE id = %(recipe_id)s;
                 """
         return connectToMySQL(db).query_db(query,data)
 

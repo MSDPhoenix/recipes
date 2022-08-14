@@ -3,7 +3,7 @@
 <div class="px-5">
     <div class="d-flex align-items-cente pt-4 pb-1">
         <h1 class="">Welcome, {{user.first_name}}</h1>
-        <a href="/create_recipe/" class="ms-auto me-5">create</a>
+        <a href="/recipes_add/" class="ms-auto me-5">create</a>
         <a href="/logout/" >logout</a>
     </div>
     <h5 class="pb-2">All posted recipes</h5>
@@ -23,10 +23,10 @@
                 <td>{{recipe.under_30}}</td>
                 <td>{{recipe.posted_by.first_name}}</td>
                 <td>
-                    <a href="/recipe_view/">view recipe</a>
+                    <a href="/recipes_view/{{recipe.id}}/">view recipe</a>
                     {% if user.id == recipe.posted_by_id %}
-                    | <a href="/recipe_edit/">edit</a>
-                    | <a href="/recipe_delete/">delete</a>
+                    | <a href="/recipes_edit/{{recipe.id}}/">edit</a>
+                    | <a href="/recipes_delete/{{recipe.id}}/">delete</a>
                     {% endif %}
                 </td>
             </tr>
