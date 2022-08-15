@@ -23,7 +23,7 @@
                 <td>{{recipe.under_30}}</td>
                 <td>{{recipe.posted_by.first_name}}</td>
                 <td>
-                    <a href="/recipes_view/{{recipe.id}}/">view recipe</a>
+                    <a href="/recipes_one/{{recipe.id}}/">view recipe</a>
                     {% if user.id == recipe.posted_by_id %}
                     | <a href="/recipes_edit/{{recipe.id}}/">edit</a>
                     | <a href="/recipes_delete/{{recipe.id}}/">delete</a>

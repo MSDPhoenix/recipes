@@ -23,7 +23,7 @@
             <textarea name="instructions" cols="30" rows="5" class="col-8 p-2 mb-3">{{recipe.instructions}}</textarea>
         </div>
         <div class="col-3 ms-0">
-            <label for="date_made" class="d-block pt-2 mb-3">Date Cooked/Made:</label>
+            <label for="date_made" class="d-block pt-2 mb-3">Date Cooked/Made:`</label>
             <input type="date" name="date_made" id="" class="d-block mb-3 p-2" value="{{recipe.date_made.strftime('%Y-%m-%d')}}">
             <label for="under_30" class="d-block pt-2 mb-3">Under 30 minutes?</label>
             <input type="radio" name="under_30" value="yes" class="" {% if recipe.under_30 == "yes" %} checked {% endif %}>

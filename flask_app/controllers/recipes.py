@@ -33,6 +33,14 @@ def recipes_edit(recipe_id):
     print("recipe.date_made = ",type(recipe.date_made))
     return render_template("recipes_edit.html",user=user,recipe=recipe)
 
+@app.route("/recipes_one/<int:recipe_id>/")
+def recipes_one(recipe_id):
+    if "user_id" not in session:
+        return redirect("/")
+    user = User.get_by_id({"user_id" : session["user_id"]})
+    recipe = Recipe.get_by_id({"recipe_id" : recipe_id})
+    return render_template("recipes_one.html",user=user,recipe=recipe)
+
 def validation_failed(data):
     pass
 
