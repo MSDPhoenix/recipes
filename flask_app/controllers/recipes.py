@@ -108,10 +108,11 @@ def recipes_update(recipe_id):
     data = {
         "name" : request.form["name"],
         "description" : request.form["description"],
-        "instructions" : request.form["description"],
+        "instructions" : request.form["instructions"],
         "date_made" : request.form["date_made"],
         "under_30" : request.form["under_30"],
         "recipe_id" : recipe_id,
     }
     Recipe.update(data)
     return redirect("/recipes/")
+

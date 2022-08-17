@@ -44,6 +44,10 @@ class Recipe:
                 """
         result = connectToMySQL(db).query_db(query,data)
         recipe = cls(result[0])
+        user_data = {
+            "user_id" : recipe.posted_by_id
+        }
+        recipe.posted_by = user.User.get_by_id(user_data)
         return recipe
 
     @classmethod
@@ -58,7 +62,7 @@ class Recipe:
     def update(cls,data):
         query = """
                 UPDATE recipes
-                SET xxx=%(name)s,xxx=%(description)s,xxx=%(instructions)s,xxx=%(date_made)s,xxx=%(under_30)s
+                SET name=%(name)s,description=%(description)s,instructions=%(instructions)s,date_made=%(date_made)s,under_30=%(under_30)s
                 WHERE id = %(recipe_id)s;
                 """
         return connectToMySQL(db).query_db(query,data)
