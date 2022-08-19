@@ -24,30 +24,47 @@ class Recipe:
     @classmethod
     def get_all(cls):
         query = """
-                SELECT * FROM recipes;
+                SELECT * FROM recipes
+                LEFT JOIN users 
+                ON recipes.posted_by_id = users.id;
                 """
         result = connectToMySQL(db).query_db(query)
         recipes = []
         for row in result:
             recipe = cls(row)
             user_data = {
-                "user_id" : row["posted_by_id"]
+                "id" : row["posted_by_id"],
+                "first_name" : row["first_name"],
+                "last_name" : row["last_name"],
+                "email" : row["email"],
+                "password" : row["password"],
+                "created_at" : row["users.created_at"],
+                "updated_at" : row["users.updated_at"]
             }
-            recipe.posted_by = user.User.get_by_id(user_data)
+            recipe.posted_by = user.User(user_data)
             recipes.append(recipe)
         return recipes
     
     @classmethod
     def get_by_id(cls,data):
         query = """
-                SELECT * FROM recipes WHERE id = %(recipe_id)s; 
+                SELECT * FROM recipes 
+                LEFT JOIN users
+                ON recipes.posted_by_id = users.id
+                WHERE recipes.id = %(recipe_id)s; 
                 """
         result = connectToMySQL(db).query_db(query,data)
         recipe = cls(result[0])
         user_data = {
-            "user_id" : recipe.posted_by_id
+            "id" : recipe.posted_by_id,
+            "first_name" : result[0]["first_name"],
+            "last_name" : result[0]["last_name"],
+            "email" : result[0]["email"],
+            "password" : result[0]["password"],
+            "created_at" : result[0]["users.created_at"],
+            "updated_at" : result[0]["users.updated_at"]
         }
-        recipe.posted_by = user.User.get_by_id(user_data)
+        recipe.posted_by = user.User(user_data)
         return recipe
 
     @classmethod
